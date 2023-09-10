@@ -1,34 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Main from "./page/Main"
+import NotFound from "./page/NotFound"
+import SignIn from "./page/SignIn"
+import SignUp from "./page/SignUp"
+import ToDo from "./page/ToDo"
 
 function App() {
-  var title = "React Project"
-
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <h1>{ title }</h1>
-        <p>{ "react" }</p>
-        <p>{ 10 }</p>
-        <p>{ [1,2,3,4,5] }</p>
-        <p>{ Math.random() *100 }</p>
-        <p></p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <BrowserRouter>
+                    <Routes>
+                        <Route exact path="/signup/"  element={<SignUp />}></Route>
+                        <Route exact path="/signin/"  element={<SignIn />}></Route>
+                        <Route exact path="/todo/"  element={<ToDo />}></Route>
+                        <Route exact path="/"  element={<Main />}></Route>
+                        <Route path="*"  element={<NotFound />}></Route>
+                    </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
