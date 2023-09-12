@@ -7,7 +7,7 @@ import ToDo from "./page/ToDo"
 
 function App() {
     return (
-        <div className="App">
+        <div className="App h-100">
             <BrowserRouter>
                     <Routes>
                         <Route exact path="/signup/"  element={<SignUp />}></Route>
