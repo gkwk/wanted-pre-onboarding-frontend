@@ -37,28 +37,35 @@ function SignUp() {
         });
     }
 
-
-
-
-    
-    function LoginSubmit(event) {
-    
-    // fetch('https://api.google.com/user', {
-    //     method: 'post',
-    //     body: JSON.stringify({
-    //         "email": document.getElementById('register_floatingemail'),
-    //         "password": document.getElementById('register_floatingPassword1'),
-    //     })
-    // })
-    // .then(response => response.json())
-    // .then(response => {
-    //     if (response.success) {
-    //         alert("저장 완료");
-    //     }
-    // })
+    function SignUpSubmit(event) {
         event.preventDefault()
-        alert("good" + "\n" +document.getElementById('register_floatingemail').value+ "\n" + document.getElementById('register_floatingPassword1').value);
-        navigate("/signin")
+
+        const TargetURL = "https://www.pre-onboarding-selection-task.shop/auth/signup"
+        // const TargetURL = "/"
+        if (form_values_isValidated.email && form_values_isValidated.password){
+
+            // console.log(form_values.email)
+
+            fetch(TargetURL, {
+                headers: {'Content-Type': 'application/json'},
+                method: 'post',
+                body: JSON.stringify({
+                    "email": form_values.email,
+                    "password": form_values.password,
+                    })
+            })
+            .then(response => {
+                if (response.status === 201) {
+                    navigate("/signin");
+                }
+                else {
+                    return response.json()
+                }
+            })
+            .then(response => {
+                console.log(response)
+            })
+        }
     }
 
     useEffect(() => {
@@ -77,7 +84,7 @@ function SignUp() {
 
             <div className="register_div">
                 <div className="form-signin m-auto">
-                <form onSubmit={LoginSubmit}>
+                <form onSubmit={SignUpSubmit} noValidate>
                     <div className="text-center">
                         <h1 className="h3 mb-5 fw-normal">Register</h1>
                     </div>
