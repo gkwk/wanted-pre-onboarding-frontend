@@ -2,7 +2,7 @@
 import Header from "../htmlpreset/Header";
 import Footer from "../htmlpreset/Footer";
 import { useState, useEffect } from "react";
-import "./css/Register.css"
+import "./css/SignIn.css"
 
 
 function SignIn() {
@@ -24,9 +24,8 @@ function SignIn() {
                 <div className="form-signin m-auto">
                 <form method="post" action="#">
                     <div className="text-center">
-                        <h1 className="h3 mb-3 fw-normal">Register</h1>
+                        <h1 className="h3 mb-5 fw-normal">LogIn</h1>
                     </div>
-
 
                     <div className="form-floating mb-3">
                         <input data-testid="email-input" type="email" name="username" className="form-control rounded-3" id="register_floatingemail" placeholder="eamil" required />
@@ -43,7 +42,7 @@ function SignIn() {
                         <label htmlFor="register_floatingPassword2">Password confirm</label>
                     </div> */}
 
-                    <button data-testid="signup-button" className="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+                    <button data-testid="signin-button" className="w-100 btn btn-lg btn-primary" type="submit">Register</button>
                 </form>
                 </div>
             </div>
