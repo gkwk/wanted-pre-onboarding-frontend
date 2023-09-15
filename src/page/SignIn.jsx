@@ -24,7 +24,7 @@ function SignIn() {
 
     const form_values_regex = {"email": /^(?=.*[@])/, "password": /^.{8,}/,};
     
-    const [form_button_isEnable, set_form_button_isEnable] = useState(true)
+    const [form_button_isEnable, set_form_button_isEnable] = useState(false)
 
     function form_values_Change(event) {
         set_form_values({
