@@ -7,18 +7,6 @@ import { useState, useEffect } from "react";
 function ToDo() {
     const navigate = useNavigate();
 
-    // const [ToDo_List,set_ToDo_List] = useState({
-    //     "1":{"todo": "과제하기","isCompleted": true},
-    // })
-
-    // const [ToDo_List_idEditing,set_ToDo_List_idEditing] = useState({
-    //     "1":false,
-    // })
-
-    // const [ToDo_List_temptodo,set_ToDo_List_temptodo] = useState({
-    //     "1":"과제하기",
-    // })
-
     const [ToDo_List,set_ToDo_List] = useState({})
 
     const [ToDo_List_idEditing,set_ToDo_List_idEditing] = useState({})
@@ -29,17 +17,12 @@ function ToDo() {
         document.getElementById('page_todo').className += " active";
     }
 
-
-
     function createTodo(event) {
         event.preventDefault()
 
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos"
         
         if (localStorage.getItem("access_token")){
-
-            // console.log(form_values.email)
-
             fetch(TargetURL, {
                 headers: {
                     "Authorization": "Bearer "+localStorage.getItem("access_token"),
@@ -58,29 +41,27 @@ function ToDo() {
             .then(response => {
                 set_ToDo_New("")
 
-                var json = response
+                console.log(response)
 
-                Object.keys(json).map(key => {
-                    set_ToDo_List({
-                        ...ToDo_List,
-                        [json[key]["id"]]:{
-                            "todo" : json[key]["todo"],
-                            "isCompleted": json[key]["isCompleted"]
-                        }})
-                })
-        
-                Object.keys(json).map(key => {
-                    set_ToDo_List_idEditing({
-                        ...ToDo_List_idEditing,
-                        [json[key]["id"]]:false})
-                })
-        
-                Object.keys(json).map(key => {
-                    set_ToDo_List_temptodo({
-                        ...ToDo_List_temptodo,
-                        [json[key]["id"]]:json[key]["todo"]})
-                })
-            })
+                const json_array = response
+
+                set_ToDo_List(ToDo_List => ({
+                    ...ToDo_List,
+                    [json_array["id"]]:{
+                        "todo" : json_array["todo"],
+                        "isCompleted": json_array["isCompleted"]
+                }}))
+
+                set_ToDo_List_idEditing(ToDo_List_idEditing => ({
+                    ...ToDo_List_idEditing,
+                    [json_array["id"]]:false
+                }));
+
+                set_ToDo_List_temptodo(ToDo_List_temptodo => ({
+                    ...ToDo_List_temptodo,
+                    [json_array["id"]]: json_array["todo"]
+                }));
+            });
         }
     }
 
@@ -90,8 +71,6 @@ function ToDo() {
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos"
         
         if (localStorage.getItem("access_token")){
-
-            // console.log(form_values.email)
 
             fetch(TargetURL, {
                 headers: {
@@ -144,13 +123,11 @@ function ToDo() {
     function deleteTodo(event) {
         event.preventDefault()
 
-        console.log(event.target.getAttribute("comment_id"))
-
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos/"+event.target.getAttribute("comment_id")
         
-        if (localStorage.getItem("access_token")){
+        const targetid = event.target.getAttribute("comment_id")
 
-            // console.log(form_values.email)
+        if (localStorage.getItem("access_token")){
 
             fetch(TargetURL, {
                 headers: {
@@ -160,7 +137,21 @@ function ToDo() {
             })
             .then(response => {
                 if (response.status === 204) {
+                    var copy1 = ToDo_List
+                    var copy2 = ToDo_List_idEditing
+                    var copy3 = ToDo_List_temptodo
+
+                    delete copy1[targetid]
+                    delete copy2[targetid]
+                    delete copy3[targetid]
+
+                    set_ToDo_List(({...copy1}))
+                    set_ToDo_List_idEditing(({...copy2}))
+                    set_ToDo_List_temptodo(({...copy3}))
+
                     console.log(response)
+
+                    console.log(copy1)
                 }
             })
         }
@@ -171,7 +162,6 @@ function ToDo() {
             return navigate("/signin")
         }
 
-        // console.log(`useEffect`);
         NavActivator();
 
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos"
@@ -193,40 +183,35 @@ function ToDo() {
 
             const json_array = response;
 
-            for (let index = 0; index < json_array.length; index++) {
-                const element = json_array[index];
+            // for (let index = 0; index < json_array.length; index++) {
+            //     const element = json_array[index];
 
-                console.log(element)
+            //     set_ToDo_List(ToDo_List => ({
+            //         ...ToDo_List,
+            //         [element["id"]]:{
+            //             "todo" : element["todo"],
+            //             "isCompleted": element["isCompleted"]
+            //     }}))
+            // }
 
+            json_array.forEach(element => {
                 set_ToDo_List(ToDo_List => ({
                     ...ToDo_List,
                     [element["id"]]:{
                         "todo" : element["todo"],
                         "isCompleted": element["isCompleted"]
                 }}))
-            }
 
-            // Object.keys(json).map(key => {
-            //     set_ToDo_List({
-            //         ...ToDo_List,
-            //         [json[key]["id"]]:{
-            //             "todo" : json[key]["todo"],
-            //             "isCompleted": json[key]["isCompleted"]
-            //         }})
-            // });
-    
-            // Object.keys(json).map(key => {
-            //     set_ToDo_List_idEditing({
-            //         ...ToDo_List_idEditing,
-            //         [json[key]["id"]]:false})
-            // });
-    
-            // Object.keys(json).map(key => {
-            //     set_ToDo_List_temptodo({
-            //         ...ToDo_List_temptodo,
-            //         [json[key]["id"]]:json[key]["todo"]})
-            // });
+                set_ToDo_List_idEditing(ToDo_List_idEditing => ({
+                    ...ToDo_List_idEditing,
+                    [element["id"]]:false
+                }));
 
+                set_ToDo_List_temptodo(ToDo_List_temptodo => ({
+                    ...ToDo_List_temptodo,
+                    [element["id"]]: element["todo"]
+                }));
+            });
         })
     }, []);
 
