@@ -90,8 +90,8 @@ function ToDo() {
         }
     }
 
-    function upateTodo(event) {
-        event.preventDefault()
+    function upateTodo(event,properties) {
+        // event.preventDefault()
 
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos/"+event.target.getAttribute("comment_id")
         
@@ -104,13 +104,16 @@ function ToDo() {
                 },
                 method: 'put',
                 body: JSON.stringify({
-                    "todo": ToDo_List_temptodo[event.target.getAttribute("comment_id")],
-                    "isCompleted": ToDo_List[event.target.getAttribute("comment_id")]["isCompleted"],
+                    "todo": properties["todo"],
+                    "isCompleted": properties["isCompleted"],
                     })
             })
             .then(response => {
                 if (response.status === 200) {
                     console.log(response)
+                    return response.json()
+                }
+                else{
                     return response.json()
                 }
             })
@@ -154,25 +157,45 @@ function ToDo() {
     }
 
     function isCompletedChange(event){
+        const properties = {
+            "todo": ToDo_List[event.target.getAttribute("comment_id")]["todo"],
+            "isCompleted": event.target.checked,
+        }
+
+        upateTodo(event,properties)
+
         set_ToDo_List({
             ...ToDo_List,
             [event.target.getAttribute("comment_id")]:{
                 ...ToDo_List[event.target.getAttribute("comment_id")],
-                "isCompleted": event.target.checked
+                "isCompleted": properties["isCompleted"]
             }
         })
+
+        // set_ToDo_List({
+        //     ...ToDo_List,
+        //     [event.target.getAttribute("comment_id")]:{
+        //         ...ToDo_List[event.target.getAttribute("comment_id")],
+        //         "isCompleted": event.target.checked
+        //     }
+        // })
     }
 
     function todoChange(event){
+        const properties = {
+            "todo": ToDo_List_temptodo[event.target.getAttribute("comment_id")],
+            "isCompleted": ToDo_List[event.target.getAttribute("comment_id")]["isCompleted"],
+        }
+
+        upateTodo(event,properties)
+
         set_ToDo_List({
             ...ToDo_List,
             [event.target.getAttribute("comment_id")]:{
                 ...ToDo_List[event.target.getAttribute("comment_id")],
-                "todo": ToDo_List_temptodo[event.target.getAttribute("comment_id")]
+                "todo": properties["todo"]
             }
-        })
-
-        upateTodo(event)
+        }) 
     }
 
     function temptodoChange(event){
