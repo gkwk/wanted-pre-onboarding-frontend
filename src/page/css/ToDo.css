@@ -13,7 +13,6 @@
     width:100%;
 }
 
-
 #todonew {
     border: 1px solid rgb(152, 162, 247);
     border-radius: 15px;
@@ -22,4 +21,11 @@
 
 .button65 {
     width: 65px;
+    min-width: 65px;
 }
+
+.button35 {
+    width: 35px;
+    min-width: 35px;
+}
+

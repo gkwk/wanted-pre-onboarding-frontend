@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from "../htmlpreset/Header";
 import Footer from "../htmlpreset/Footer";
 import { useState, useEffect } from "react";
@@ -69,8 +69,8 @@ function SignIn() {
 
                 if ("access_token" in response) {
                     localStorage.setItem("access_token",response["access_token"])
+                    navigate("/todo")
                 }
-                navigate("/todo")
             })
         }
     }
@@ -93,7 +93,7 @@ function SignIn() {
                 <div className="form-signin m-auto">
                 <form onSubmit={SignInSubmit}>
                     <div className="text-center">
-                        <h1 className="h3 mb-5 fw-normal">Register</h1>
+                        <h1 className="h3 mb-5 fw-normal">Sign In</h1>
                     </div>
 
                     <div className="form-floating mb-3">

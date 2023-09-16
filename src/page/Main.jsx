@@ -1,6 +1,5 @@
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Header from "../htmlpreset/Header";
 import Footer from "../htmlpreset/Footer";
 
@@ -12,7 +11,6 @@ function Main() {
     }
 
     useEffect(() => {
-        // console.log(`useEffect`);
         NavActivator()
     }, []);
 
@@ -21,10 +19,13 @@ function Main() {
             
             { Header() } 
 
-            <main>
+            <main className='h-100'>
 
-                <div id="_content">
-
+                <div id="_content"  className="d-flex align-items-center container h-100">
+                    <div className='text-center w-100'>
+                        <h1><b>Wanted Pre Onboarding Frontend</b></h1>
+                    </div>
+                    
                 </div>
 
             </main>

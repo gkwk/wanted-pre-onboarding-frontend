@@ -1,4 +1,3 @@
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Header from "../htmlpreset/Header";
 import Footer from "../htmlpreset/Footer";
 import { useState, useEffect } from "react";
@@ -6,8 +5,6 @@ import "./css/ToDo.css"
 
 
 function ToDo() {
-    const navigate = useNavigate();
-
     const [ToDo_List,set_ToDo_List] = useState({})
 
     const [ToDo_List_idEditing,set_ToDo_List_idEditing] = useState({})
@@ -245,7 +242,7 @@ function ToDo() {
                 {Object.keys(ToDoList).map((id) => (
                     <li key={id} className="d-flex justify-content-center">
                         <label className="d-flex justify-content-center" id="todoitem">
-                            <input className="me-3" type="checkbox" comment_id={id} checked={ToDoList[id]["isCompleted"]} onChange={isCompletedChange}/>
+                            <input className="me-3 button35" type="checkbox" comment_id={id} checked={ToDoList[id]["isCompleted"]} onChange={isCompletedChange}/>
                             {ToDo_List_idEditing[id] ?
                                 <div className="flex-grow-1">
                                     <input className="form-control text-break flex-grow-1 todoitem_name" data-testid="modify-input" comment_id={id} value={ToDo_List_temptodo[id]} onChange={temptodoChange} />
@@ -271,10 +268,6 @@ function ToDo() {
     };
 
     useEffect(() => {
-        if (!("access_token" in localStorage)) {
-            return navigate("/signin")
-        }
-
         NavActivator();
 
         getTodo()
