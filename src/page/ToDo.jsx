@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Header from "../htmlpreset/Header";
 import Footer from "../htmlpreset/Footer";
 import { useState, useEffect } from "react";
+import "./css/ToDo.css"
 
 
 function ToDo() {
@@ -24,7 +25,7 @@ function ToDo() {
 
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos"
         
-        if (localStorage.getItem("access_token")){
+        if (localStorage.getItem("access_token") && (ToDo_New !== "")){
             fetch(TargetURL, {
                 headers: {
                     "Authorization": "Bearer "+localStorage.getItem("access_token"),
@@ -42,6 +43,8 @@ function ToDo() {
                 }
             })
             .then(response => {
+                console.log(response)
+
                 set_ToDo_New("")
 
                 const json_array = response
@@ -66,9 +69,7 @@ function ToDo() {
         }
     }
 
-    function getTodo(event) {
-        event.preventDefault()
-
+    function getTodo() {
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos"
         
         if (localStorage.getItem("access_token")){
@@ -85,7 +86,26 @@ function ToDo() {
                 }
             })
             .then(response => {
-                return response
+                const json_array = response;
+
+                json_array.forEach(element => {
+                    set_ToDo_List(ToDo_List => ({
+                        ...ToDo_List,
+                        [element["id"]]:{
+                            "todo" : element["todo"],
+                            "isCompleted": element["isCompleted"]
+                    }}))
+
+                    set_ToDo_List_idEditing(ToDo_List_idEditing => ({
+                        ...ToDo_List_idEditing,
+                        [element["id"]]:false
+                    }));
+
+                    set_ToDo_List_temptodo(ToDo_List_temptodo => ({
+                        ...ToDo_List_temptodo,
+                        [element["id"]]: element["todo"]
+                    }));
+                });
             })
         }
     }
@@ -95,7 +115,7 @@ function ToDo() {
 
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos/"+event.target.getAttribute("comment_id")
         
-        if (localStorage.getItem("access_token")){
+        if (localStorage.getItem("access_token") && (properties["todo"] !== "")){
 
             fetch(TargetURL, {
                 headers: {
@@ -171,14 +191,6 @@ function ToDo() {
                 "isCompleted": properties["isCompleted"]
             }
         })
-
-        // set_ToDo_List({
-        //     ...ToDo_List,
-        //     [event.target.getAttribute("comment_id")]:{
-        //         ...ToDo_List[event.target.getAttribute("comment_id")],
-        //         "isCompleted": event.target.checked
-        //     }
-        // })
     }
 
     function todoChange(event){
@@ -187,15 +199,20 @@ function ToDo() {
             "isCompleted": ToDo_List[event.target.getAttribute("comment_id")]["isCompleted"],
         }
 
-        upateTodo(event,properties)
+        if (properties["todo"] !== "") {
+            upateTodo(event,properties)
 
-        set_ToDo_List({
-            ...ToDo_List,
-            [event.target.getAttribute("comment_id")]:{
-                ...ToDo_List[event.target.getAttribute("comment_id")],
-                "todo": properties["todo"]
-            }
-        }) 
+            set_ToDo_List({
+                ...ToDo_List,
+                [event.target.getAttribute("comment_id")]:{
+                    ...ToDo_List[event.target.getAttribute("comment_id")],
+                    "todo": properties["todo"]
+                }
+            }) 
+        }
+        else {
+            temptodoReset(event)
+        }
     }
 
     function temptodoChange(event){
@@ -225,31 +242,74 @@ function ToDo() {
 
     function ToDolisting(ToDoList) {
         return (
-            <div>
+            <ul>
                 {Object.keys(ToDoList).map((id) => (
-                    <div key={id}>
-                        <li>
-                            <label>
-                                {ToDo_List_idEditing[id] ?
-                                    <div>
-                                        <input type="checkbox" comment_id={id} checked={ToDoList[id]["isCompleted"]} onChange={isCompletedChange}/>
-                                        <input data-testid="modify-input" comment_id={id} value={ToDo_List_temptodo[id]} onChange={temptodoChange} />
-                                        <button data-testid="submit-button" comment_id={id} onClick={(event) => {todoChange(event);isEditingChange(event)}}>제출</button>
-                                        <button data-testid="cancel-button" comment_id={id} onClick={(event) => {temptodoReset(event);isEditingChange(event)}}>취소</button>
-                                    </div>
+                    <li key={id}>
+                        <label>
+                            <input type="checkbox" comment_id={id} checked={ToDoList[id]["isCompleted"]} onChange={isCompletedChange}/>
+                            {ToDo_List_idEditing[id] ?
+                                <input data-testid="modify-input" comment_id={id} value={ToDo_List_temptodo[id]} onChange={temptodoChange} />
                                 :
-                                    <div>
-                                        <input type="checkbox" comment_id={id} checked={ToDoList[id]["isCompleted"]} onChange={isCompletedChange}/>
-                                        <span>{ToDoList[id]["todo"]}</span>
-                                        <button data-testid="modify-button" comment_id={id} onClick={isEditingChange}>수정</button>
-                                        <button data-testid="delete-button" comment_id={id} onClick={deleteTodo}>삭제</button>
-                                    </div>
-                                }
-                            </label>
-                        </li>
-                    </div>
+                                <span>{ToDoList[id]["todo"]}</span>
+                            }
+                            {ToDo_List_idEditing[id] ?
+                                <button data-testid="submit-button" comment_id={id} onClick={(event) => {todoChange(event);isEditingChange(event)}}>제출</button>
+                                :
+                                <button data-testid="modify-button" comment_id={id} onClick={isEditingChange}>수정</button>
+                            }
+                            {ToDo_List_idEditing[id] ?
+                                <button data-testid="cancel-button" comment_id={id} onClick={(event) => {temptodoReset(event);isEditingChange(event)}}>취소</button>
+                                :
+                                <button data-testid="delete-button" comment_id={id} onClick={deleteTodo}>삭제</button>
+                            }
+                        </label>
+                    </li>
                 ))}
-            </div>
+            </ul>
+        );
+    };
+
+    function ToDolisting2(ToDoList) {
+        return (
+
+            <ul id="todolist" className="overflow-auto" >
+
+                {Object.keys(ToDoList).map((id) => (
+                    <li key={id} className="d-flex justify-content-center">
+                        <label className="d-flex justify-content-center" id="todoitem">
+                            <input className="me-3" type="checkbox" comment_id={id} checked={ToDoList[id]["isCompleted"]} onChange={isCompletedChange}/>
+                            {ToDo_List_idEditing[id] ?
+                                <div className="flex-grow-1">
+                                    <input className="form-control text-break flex-grow-1 todoitem_name" data-testid="modify-input" comment_id={id} value={ToDo_List_temptodo[id]} onChange={temptodoChange} />
+                                </div>
+                                :
+                                <span className="d-flex align-items-center text-break flex-grow-1 todoitem_name ">{ToDoList[id]["todo"]}</span>
+                            }
+                            {ToDo_List_idEditing[id] ?
+                                <button data-testid="submit-button" className="btn btn-primary ms-3 button65" comment_id={id} onClick={(event) => {todoChange(event);isEditingChange(event)}}>제출</button>
+                                :
+                                <button data-testid="modify-button" className="btn btn-primary ms-3 button65" comment_id={id} onClick={isEditingChange}>수정</button>
+                            }
+                            {ToDo_List_idEditing[id] ?
+                                <button data-testid="cancel-button" className="btn btn-primary ms-3 button65" comment_id={id} onClick={(event) => {temptodoReset(event);isEditingChange(event)}}>취소</button>
+                                :
+                                <button data-testid="delete-button" className="btn btn-primary ms-3 button65" comment_id={id} onClick={deleteTodo}>삭제</button>
+                            }
+                        </label>
+                    </li>
+                ))}
+                {/* <div className="d-flex justify-content-center">
+                    <div>
+                        <div className="d-flex justify-content-center" id="todoitem">
+                            <div className="me-3">
+                                <div className="text-break">
+                                Todo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> */}
+            </ul>
         );
     };
 
@@ -260,44 +320,7 @@ function ToDo() {
 
         NavActivator();
 
-        const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos"
-        
-        fetch(TargetURL, {
-            headers: {
-                "Authorization": "Bearer "+localStorage.getItem("access_token")
-            },
-            method: 'get'
-        })
-        .then(response => {
-            if (response.status === 200) {
-                console.log(response)
-                return response.json()
-            }
-        })
-        .then(response => {
-            console.log(response);
-
-            const json_array = response;
-
-            json_array.forEach(element => {
-                set_ToDo_List(ToDo_List => ({
-                    ...ToDo_List,
-                    [element["id"]]:{
-                        "todo" : element["todo"],
-                        "isCompleted": element["isCompleted"]
-                }}))
-
-                set_ToDo_List_idEditing(ToDo_List_idEditing => ({
-                    ...ToDo_List_idEditing,
-                    [element["id"]]:false
-                }));
-
-                set_ToDo_List_temptodo(ToDo_List_temptodo => ({
-                    ...ToDo_List_temptodo,
-                    [element["id"]]: element["todo"]
-                }));
-            });
-        })
+        getTodo()
     }, []);
 
     useEffect(()=>{
@@ -309,14 +332,44 @@ function ToDo() {
 
 
     return (
-        <div className="d-flex flex-column h-100">
+        <div className="d-flex flex-column h-100 container">
             { Header() }
-
+{/* 
             { ToDolisting(ToDo_List) }
 
             <input data-testid="new-todo-input" value={ToDo_New} onChange={todoNewChange} />
-            <button data-testid="new-todo-add-button" onClick={createTodo}>추가</button>
+            <button data-testid="new-todo-add-button" onClick={createTodo}>추가</button> */}
 
+            <div id="chat_main_div">
+                {ToDolisting2(ToDo_List)}
+
+                {/* <div id="todolist" class="overflow-auto" >
+                    <div className="d-flex justify-content-center">
+                        <div>
+                            <div className="d-flex justify-content-center" id="todoitem">
+                                <div className="me-3">
+                                    <div className="text-break">
+                                    Todo
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> */}
+
+                <div className="mt-4" id="todonew">
+                    <div className="d-flex">
+                        <div className="w-100">
+                            <div className="d-flex">
+                                <div className="flex-grow-1">
+                                    <input data-testid="new-todo-input" value={ToDo_New} onChange={todoNewChange} className="flex-grow-1 form-control"/>
+                                </div>
+                                <button data-testid="new-todo-add-button" onClick={createTodo} className="btn btn-primary ms-3 button65">추가</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             { Footer() } 
         </div>

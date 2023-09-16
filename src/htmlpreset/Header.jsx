@@ -13,9 +13,9 @@ function Header() {
                 
                 <ul className="nav nav-pills">
                     <li className="nav-item"><Link to="/" className="nav-link" aria-current="page" id="page_home">Home</Link></li>
-                    <li className="nav-item"><Link to="/signin" className="nav-link" id="page_signin">SignIn</Link></li>
-                    <li className="nav-item"><Link to="/signup" className="nav-link" id="page_signup">SignUp</Link></li>
-                    <li className="nav-item"><Link to="/todo" className="nav-link" id="page_todo">ToDo</Link></li>
+                    {(localStorage.getItem("access_token")) ? undefined : <li className="nav-item"><Link to="/signin" className="nav-link" id="page_signin">SignIn</Link></li> }
+                    {(localStorage.getItem("access_token")) ? undefined : <li className="nav-item"><Link to="/signup" className="nav-link" id="page_signup">SignUp</Link></li> }
+                    {(localStorage.getItem("access_token")) ? <li className="nav-item"><Link to="/todo" className="nav-link" id="page_todo">ToDo</Link></li> : undefined }
                 </ul>
             </header>
         </div>

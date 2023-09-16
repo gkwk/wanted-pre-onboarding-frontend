@@ -1,0 +1,25 @@
+#todolist {
+    border: 1px solid rgb(152, 162, 247);
+    border-radius: 15px;
+    height : calc( 100vh - (24px + 24px + 1px + 1px + 10px + 10px + 24px + 24px + 1px + 1px + 10px + 10px + 66px + 16px + 16px + 40px + 1px + 24px) );
+    padding: 10px 10px 10px 10px;
+    min-height:360px;
+}
+
+#todoitem {
+    border: 1px solid rgb(152, 162, 247);
+    border-radius: 15px;
+    padding: 10px;
+    width:100%;
+}
+
+
+#todonew {
+    border: 1px solid rgb(152, 162, 247);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.button65 {
+    width: 65px;
+}
