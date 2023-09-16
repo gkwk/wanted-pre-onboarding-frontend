@@ -111,8 +111,6 @@ function ToDo() {
     }
 
     function upateTodo(event,properties) {
-        // event.preventDefault()
-
         const TargetURL = "https://www.pre-onboarding-selection-task.shop/todos/"+event.target.getAttribute("comment_id")
         
         if (localStorage.getItem("access_token") && (properties["todo"] !== "")){
@@ -242,38 +240,8 @@ function ToDo() {
 
     function ToDolisting(ToDoList) {
         return (
-            <ul>
-                {Object.keys(ToDoList).map((id) => (
-                    <li key={id}>
-                        <label>
-                            <input type="checkbox" comment_id={id} checked={ToDoList[id]["isCompleted"]} onChange={isCompletedChange}/>
-                            {ToDo_List_idEditing[id] ?
-                                <input data-testid="modify-input" comment_id={id} value={ToDo_List_temptodo[id]} onChange={temptodoChange} />
-                                :
-                                <span>{ToDoList[id]["todo"]}</span>
-                            }
-                            {ToDo_List_idEditing[id] ?
-                                <button data-testid="submit-button" comment_id={id} onClick={(event) => {todoChange(event);isEditingChange(event)}}>제출</button>
-                                :
-                                <button data-testid="modify-button" comment_id={id} onClick={isEditingChange}>수정</button>
-                            }
-                            {ToDo_List_idEditing[id] ?
-                                <button data-testid="cancel-button" comment_id={id} onClick={(event) => {temptodoReset(event);isEditingChange(event)}}>취소</button>
-                                :
-                                <button data-testid="delete-button" comment_id={id} onClick={deleteTodo}>삭제</button>
-                            }
-                        </label>
-                    </li>
-                ))}
-            </ul>
-        );
-    };
-
-    function ToDolisting2(ToDoList) {
-        return (
 
             <ul id="todolist" className="overflow-auto" >
-
                 {Object.keys(ToDoList).map((id) => (
                     <li key={id} className="d-flex justify-content-center">
                         <label className="d-flex justify-content-center" id="todoitem">
@@ -298,17 +266,6 @@ function ToDo() {
                         </label>
                     </li>
                 ))}
-                {/* <div className="d-flex justify-content-center">
-                    <div>
-                        <div className="d-flex justify-content-center" id="todoitem">
-                            <div className="me-3">
-                                <div className="text-break">
-                                Todo
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
             </ul>
         );
     };
@@ -332,30 +289,11 @@ function ToDo() {
 
 
     return (
-        <div className="d-flex flex-column h-100 container">
+        <div className="d-flex flex-column h-100">
             { Header() }
-{/* 
-            { ToDolisting(ToDo_List) }
 
-            <input data-testid="new-todo-input" value={ToDo_New} onChange={todoNewChange} />
-            <button data-testid="new-todo-add-button" onClick={createTodo}>추가</button> */}
-
-            <div id="chat_main_div">
-                {ToDolisting2(ToDo_List)}
-
-                {/* <div id="todolist" class="overflow-auto" >
-                    <div className="d-flex justify-content-center">
-                        <div>
-                            <div className="d-flex justify-content-center" id="todoitem">
-                                <div className="me-3">
-                                    <div className="text-break">
-                                    Todo
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+            <div id="chat_main_div" className="container">
+                {ToDolisting(ToDo_List)}
 
                 <div className="mt-4" id="todonew">
                     <div className="d-flex">
