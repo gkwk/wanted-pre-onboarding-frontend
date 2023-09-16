@@ -4,6 +4,9 @@ import Footer from "../htmlpreset/Footer";
 import { useState, useEffect } from "react";
 import "./css/Register.css"
 
+import SignInIDvalidator from '../validator/SignIn_ID_validator'; 
+import SignInPasswordvalidator from '../validator/SignIn_Password_validator';
+
 function SignUp() {
     const navigate = useNavigate();
 
@@ -21,7 +24,8 @@ function SignUp() {
         password: false,
     })
 
-    const form_values_regex = {"email": /^(?=.*[@])/, "password": /^.{8,}/,};
+    // const form_values_regex = {"email": /^(?=.*[@])/, "password": /^.{8,}/,};
+    const form_values_regex = {"email": SignInIDvalidator, "password": SignInPasswordvalidator,};
     
     const [form_button_isEnable, set_form_button_isEnable] = useState(false)
 
@@ -33,7 +37,7 @@ function SignUp() {
 
         set_form_values_isValidated({
             ...form_values_isValidated,
-            [event.target.name]: form_values_regex[event.target.name].test(event.target.value),
+            [event.target.name]: form_values_regex[event.target.name](event.target.value),
         });
     }
 

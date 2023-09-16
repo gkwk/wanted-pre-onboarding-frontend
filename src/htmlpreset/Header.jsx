@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './css/Header.css';
-import AuthCheck from "../page/AuthCheck"
+import AuthCheck from "../AuthCheck/AuthCheck"
 
 function Header() {
     return (

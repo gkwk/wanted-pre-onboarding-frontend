@@ -2,7 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import Header from "../htmlpreset/Header";
 import Footer from "../htmlpreset/Footer";
 import { useState, useEffect } from "react";
-import "./css/SignIn.css"
+import "./css/SignIn.css";
+
+import SignInIDvalidator from '../validator/SignIn_ID_validator'; 
+import SignInPasswordvalidator from '../validator/SignIn_Password_validator';
 
 
 function SignIn() {
@@ -22,7 +25,8 @@ function SignIn() {
         password: false,
     })
 
-    const form_values_regex = {"email": /^(?=.*[@])/, "password": /^.{8,}/,};
+    // const form_values_regex = {"email": /^(?=.*[@])/, "password": /^.{8,}/,};
+    const form_values_regex = {"email": SignInIDvalidator, "password": SignInPasswordvalidator,};
     
     const [form_button_isEnable, set_form_button_isEnable] = useState(false)
 
@@ -34,7 +38,9 @@ function SignIn() {
 
         set_form_values_isValidated({
             ...form_values_isValidated,
-            [event.target.name]: form_values_regex[event.target.name].test(event.target.value),
+            // [event.target.name]: form_values_regex[event.target.name].test(event.target.value),
+            [event.target.name]: form_values_regex[event.target.name](event.target.value),
+
         });
     }
 

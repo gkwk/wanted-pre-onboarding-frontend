@@ -6,7 +6,7 @@ import SignIn from "./page/SignIn"
 import SignUp from "./page/SignUp"
 import ToDo from "./page/ToDo"
 
-import AuthCheck from "./page/AuthCheck"
+import AuthCheck from "./AuthCheck/AuthCheck"
 
 
 function App() {

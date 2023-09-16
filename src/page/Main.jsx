@@ -23,7 +23,7 @@ function Main() {
 
                 <div id="_content"  className="d-flex align-items-center container h-100">
                     <div className='text-center w-100'>
-                        <h1><b>Wanted Pre Onboarding Frontend</b></h1>
+                        <h1><b>Wanted PreOnboarding Frontend</b></h1>
                     </div>
                     
                 </div>
