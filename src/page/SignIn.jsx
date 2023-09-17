@@ -126,7 +126,7 @@ function SignIn() {
                         { form_values_isValidated.password ? <br/> : "암호 유효성 검사 불통과" }
                     </div>
 
-                    <button data-testid="signup-button" disabled={!form_button_isEnable}  className="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
+                    <button data-testid="signin-button" disabled={!form_button_isEnable}  className="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
                 </form>
                 </div>
             </div>
