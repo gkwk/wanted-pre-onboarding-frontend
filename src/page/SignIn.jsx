@@ -4,6 +4,8 @@ import Footer from "../htmlpreset/Footer";
 import { useState, useEffect } from "react";
 import "./css/SignIn.css";
 
+import logo from '../W_logo.svg';
+
 import SignInIDvalidator from '../validator/SignIn_ID_validator'; 
 import SignInPasswordvalidator from '../validator/SignIn_Password_validator';
 
@@ -97,7 +99,11 @@ function SignIn() {
 
             <div className="register_div">
                 <div className="form-signin m-auto">
-                <form onSubmit={SignInSubmit}>
+                <div className='d-flex justify-content-center'>
+                    <img src={logo} className="signin_logo mb-3" alt="logo" />
+                </div>
+
+                <form onSubmit={SignInSubmit} noValidate>
                     <div className="text-center">
                         <h1 className="h3 mb-5 fw-normal">Sign In</h1>
                     </div>
@@ -120,7 +126,7 @@ function SignIn() {
                         { form_values_isValidated.password ? <br/> : "암호 유효성 검사 불통과" }
                     </div>
 
-                    <button data-testid="signup-button" disabled={!form_button_isEnable}  className="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+                    <button data-testid="signup-button" disabled={!form_button_isEnable}  className="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
                 </form>
                 </div>
             </div>

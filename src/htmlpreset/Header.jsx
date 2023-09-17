@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import './css/Header.css';
 import AuthCheck from "../AuthCheck/AuthCheck"
+import logo from '../W_logo.svg';
 
 function Header() {
     return (
         <div className="container">
             <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" id="_header">
                 <Link to="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                    <img src={logo} className="header_logo me-3" alt="logo" />
                     <span className="fs-4"><b>WPOF</b></span>
                 </Link>
                 

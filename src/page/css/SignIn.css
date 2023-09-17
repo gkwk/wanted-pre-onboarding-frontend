@@ -26,3 +26,7 @@
 .form-signin .form-floating:focus-within {
     z-index: 2;
   }
+
+.signin_logo {
+  width: 96px;
+}
