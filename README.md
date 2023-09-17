@@ -12,10 +12,10 @@
 
 ## 프로젝트 실행 방법
 
-"""zsh
+```zsh
 $ npm install
 $ npm start
-"""
+```
 
 - 실행 후 http://localhost:3000 로 서버에 접속할 수 있습니다.
 
