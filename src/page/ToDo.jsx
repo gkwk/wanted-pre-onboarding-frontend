@@ -64,6 +64,9 @@ function ToDo() {
                 }));
             });
         }
+        else {
+            alert("error")
+        }
     }
 
     function getTodo() {
@@ -133,8 +136,11 @@ function ToDo() {
                 }
             })
             .then(response => {
-                console.log(response)
+                // console.log(response)
             })
+        }
+        else {
+            alert("error")
         }
     }
 
@@ -273,12 +279,11 @@ function ToDo() {
         getTodo()
     }, []);
 
-    useEffect(()=>{
-        
-        console.log(ToDo_List)
-        console.log(ToDo_List_idEditing)
-        console.log(ToDo_List_temptodo)
-    },[ToDo_List,ToDo_List_idEditing,ToDo_List_temptodo])
+    // useEffect(()=>{
+    //     console.log(ToDo_List)
+    //     console.log(ToDo_List_idEditing)
+    //     console.log(ToDo_List_temptodo)
+    // },[ToDo_List,ToDo_List_idEditing,ToDo_List_temptodo])
 
 
     return (

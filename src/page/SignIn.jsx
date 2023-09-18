@@ -69,11 +69,12 @@ function SignIn() {
                     return response.json()
                 }
                 else {
+                    alert("error")
                     return response.json()
                 }
             })
             .then(response => {
-                console.log(response)
+                // console.log(response)
 
                 if ("access_token" in response) {
                     localStorage.setItem("access_token",response["access_token"])

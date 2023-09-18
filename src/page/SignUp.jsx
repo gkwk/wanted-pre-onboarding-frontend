@@ -65,11 +65,12 @@ function SignUp() {
                     navigate("/signin");
                 }
                 else {
+                    alert("error")
                     return response.json()
                 }
             })
             .then(response => {
-                console.log(response)
+                // console.log(response)
             })
         }
     }
