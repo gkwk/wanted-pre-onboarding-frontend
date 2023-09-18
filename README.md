@@ -114,16 +114,16 @@ $ npm start
 
 # 데모 영상
 ## 계정 생성
-<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/a7359495-b8d1-4f1b-8127-2acbec54028c.gif"/>
+<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/bbf77dd7-85f8-46fe-b240-ceceb821ad3e.gif"/>
 
 ## 계정 접속
-<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/738c929a-4b72-46d3-af2e-3442995aedad.gif"/>
+<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/57dc3f0e-90bd-482d-b542-f7866acbff60.gif"/>
 
 ## ToDo CRUD
-<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/dd83af69-6c23-43ce-93bd-5c1bf6f3bb00.gif"/>
+<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/9a259ded-591a-4dbe-97d1-fc0226c72c16.gif"/>
 
 ## 리다이렉트
-<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/1de8a89a-ad78-4f7e-8916-e54e64ac0279.gif"/>
+<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/e208d5db-9269-4683-ae3a-a0c6496466b4.gif"/>
 
 
 # 배포 주소
