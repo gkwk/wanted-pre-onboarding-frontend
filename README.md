@@ -5,15 +5,15 @@
 
 # Assignment 0
 - [✔] Create React App을 이용해 과제를 구현해주세요. Create React App외의 다른 툴체인 사용은 허용하지 않습니다.
-- [✔] 프로젝트는 Node.js LTS(현 시점 기준 18.17.0) 버전에서 실행 가능해야 합니다.
+- [✔] 프로젝트는 Node.js LTS 버전에서 실행 가능해야 합니다.
 - [✔] git clone 후, npm install & npm start 명령어를 통해서 바로 정상동작이 가능하게 해주세요. 추가적인 과정 없이 바로 실행이 가능하도록 해주세요
 - [✔] 함수 컴포넌트를 이용해서 진행해주세요.
 - [✔] UI는 지원자 개인이 생각했을 때 자연스러운 형태로 구현해주세요, UI는 평가에 영향을 미치지 않습니다.
-- [✖] README.md 작성은 필수입니다. 아래의 사항은 반드시 포함되도록 해주세요.
+- [✔] README.md 작성은 필수입니다. 아래의 사항은 반드시 포함되도록 해주세요.
     - [✔] 지원자의 성명
     - [✔] 프로젝트의 실행 방법
-    - 데모 영상
-    - 데모 영상은 배포 링크로 대체 가능하며, 배포가 되었고 배포된 사이트에서 기능이 모두 동작하면 가산점이 부여됩니다.
+    - [✔] 데모 영상
+    - [✔] 데모 영상은 배포 링크로 대체 가능하며, 배포가 되었고 배포된 사이트에서 기능이 모두 동작하면 가산점이 부여됩니다.
 - [✔] 기능구현에 직접적으로 연관된 라이브러리 사용은 허용되지 않습니다.(React-Query 등)
 - [✔] 사용가능한 라이브러리 목록은 아래와 같습니다.
     - [✔] React Router(react-router-dom)
@@ -113,13 +113,17 @@ $ npm start
 
 # 데모 영상
 ## 계정 생성
+<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/a7359495-b8d1-4f1b-8127-2acbec54028c.gif"/>
 
 ## 계정 접속
+<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/738c929a-4b72-46d3-af2e-3442995aedad.gif"/>
 
 ## ToDo CRUD
+<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/dd83af69-6c23-43ce-93bd-5c1bf6f3bb00.gif"/>
 
 ## 리다이렉트
+<img width="80%" src="https://github.com/gkwk/wanted-pre-onboarding-frontend/assets/124476558/1de8a89a-ad78-4f7e-8916-e54e64ac0279.gif"/>
 
 
 # 배포 주소
-- 
+- https://gkwk-wpof.pages.dev/
