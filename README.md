@@ -99,6 +99,7 @@ $ npm start
     - Main.jsx : 메인페이지
     - SignIn.jsx : 유효성 검사기와 fetch를 사용한 로그인 페이지
     - SignUp.jsx : 유효성 검사기와 fetch를 사용한 회원가입 페이지
+    - SignOut.jsx : JWT 삭제를 통한 로그아웃 실행 페이지
     - ToDo.jsx : ToDo를 구현한 페이지. ToDo의 해야 할 일, 완료 여부 구현. CRUD 기능 구현
     - NotFound.jsx : App.jsx에 등록된 URL외의 다른 URL에 접근시 404 Not Found를 출력
 
